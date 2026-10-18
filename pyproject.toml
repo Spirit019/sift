@@ -1,16 +1,16 @@
 [project]
 name = "log-analyzer"
 version = "0.1.0"
-description = "Add your description here"
+description = "A CLI tool that sifts through structured log files (JSON lines), filters by level, and prints matching entries. Cuts through the noise to find what broke."
 readme = "README.md"
 authors = [
     { name = "Spirit019", email = "nikamshreyash1947@gmail.com" }
 ]
 requires-python = ">=3.14"
-dependencies = []
+dependencies = ["rich", "typer", "pydantic"]
 
 [project.scripts]
-log-analyzer = "log_analyzer:main"
+sift = "log_analyzer.cli:app"
 
 [build-system]
 requires = ["uv_build>=0.13.1,<0.14.0"]
