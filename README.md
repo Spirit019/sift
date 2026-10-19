@@ -8,21 +8,29 @@ For development:
 
 ```bash
 uv sync
-uv run python main.py test.log --level ERROR
+uv run sift test.log --level ERROR
+```
+
+Or install globally:
+
+```bash
+uv build
+pipx install ./dist/*.whl --force
+sift /path/to/app.log --level ERROR
 ```
 
 ## Usage
 
 ```bash
 # Show only ERROR lines (default)
-python main.py test.log
+sift test.log
 
 # Filter by level (case-insensitive)
-python main.py test.log --level INFO
-python main.py test.log -l warn
+sift test.log --level INFO
+sift test.log -l warn
 
 # See all options
-python main.py --help
+sift --help
 ```
 
 ## Log format
@@ -40,4 +48,7 @@ Broken lines are skipped silently. The `service` field is optional.
 - **typer**: `Argument` vs `Option`, short flags (`-l`), auto-generated `--help`
 - **pydantic**: `BaseModel`, `model_validate_json`, skipping invalid lines with try/except
 - **Case-insensitive filtering** with `.upper()` on both sides of the comparison
+- **rich**: `Table`, `add_column`/`add_row`, `Console().print` for bordered output
+- **Packaging**: `src/` layout, `[project.scripts]` entry points, `uv build` + `pipx install`
+- **Testing**: `pytest` + `typer.testing.CliRunner` + `tmp_path` for isolated CLI tests
 
